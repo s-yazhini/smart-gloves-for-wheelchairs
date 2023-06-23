@@ -36,4 +36,4 @@ interface all the components as per the given block diagram
 
 code is written in Arduino IDE
 
-refer code - 
+refer code from smart_gloves_code file
