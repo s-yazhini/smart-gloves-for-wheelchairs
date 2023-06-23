@@ -18,9 +18,13 @@ accelerometer data in real-time
 # Components required
 
 Arduino uno
+
 Acceleromrter - Adxl 345
+
 Motor driver - L293D
+
 DC Motor - rpm 100
+
 Battery - 9-12 V
 
 # Procedure
