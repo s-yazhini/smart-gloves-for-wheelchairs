@@ -1,0 +1,124 @@
+#include<stdio.h>
+
+#include <SparkFun_ADXL345.h>
+ADXL345 adxl = ADXL345();
+
+int range = 2; // Range: 2g, 4g, 8g, 16g
+int x, y, z;
+int x1,y1,z1;
+int enA = 9;
+int in1 = 8;
+int in2 = 7;
+int enB = 3;
+int in3 = 5;
+int in4 = 4;
+
+void setup() {
+Serial.begin(9600);
+adxl.powerOn();
+adxl.setRangeSetting(range);
+adxl.readAccel(&x, &y, &z);
+
+pinMode(enA, OUTPUT);
+pinMode(in1, OUTPUT);
+pinMode(in2, OUTPUT);
+pinMode(enB, OUTPUT);
+pinMode(in3, OUTPUT);
+pinMode(in4, OUTPUT);
+}
+
+void loop() {
+
+adxl.readAccel(&x1, &y1, &z1);
+int x2 = x1 - x;
+int y2 = y1 - y;
+int z2 = z1 - z;
+
+if(y2 <= -200){
+Serial.println("Forward");
+// motor-1
+digitalWrite(in1, LOW);
+digitalWrite(in2, HIGH);
+analogWrite(enA,200);
+
+//m-2
+digitalWrite(in3, LOW);
+digitalWrite(in4, HIGH);
+analogWrite(enB,200);
+delay(1000);
+
+for (int i = 255; i >= 0; --i){
+
+analogWrite(enA,i);
+analogWrite(enB,i);
+}
+}
+
+else if(y2 >= 200){
+//
+//
+//
+
+Serial.println("Backward");
+digitalWrite(in1, HIGH);
+digitalWrite(in2, LOW);
+analogWrite(enA,200);
+
+//m-2
+digitalWrite(in3, HIGH);
+digitalWrite(in4, LOW);
+analogWrite(enB,200);
+delay(1000);
+for (int i=0; i<=255; i++){
+analogWrite(enA,i);
+analogWrite(enB,i);
+}
+}
+
+else if(x2 >= 20){
+Serial.println("Right");
+digitalWrite(in1, HIGH);
+digitalWrite(in2, LOW);
+analogWrite(enA,200);
+
+//m-2
+digitalWrite(in3, LOW);
+digitalWrite(in4, LOW);
+analogWrite(enB,200);
+
+delay(1000);
+for (int i=0; i<=255; i++){
+analogWrite(enA,i);
+analogWrite(enB,i);
+
+}
+}
+else if(x1 <0){
+Serial.println("Left");
+digitalWrite(in1, LOW);
+digitalWrite(in2, LOW);
+analogWrite(enA,200);
+
+//m-2
+digitalWrite(in3, HIGH);
+digitalWrite(in4, LOW);
+analogWrite(enB,200);
+delay(1000);
+
+for (int i = 255; i >= 0; --i){
+analogWrite(enA,i);
+analogWrite(enB,i);
+}
+}
+
+else
+Serial.println("Stop");
+/*Serial.print("X: ");
+Serial.print(x1);
+Serial.print(" Y: ");
+Serial.print(y1);
+Serial.print(" Z: ");
+Serial.println(z1);*/
+delay(500);
+
+}
