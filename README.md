@@ -37,4 +37,4 @@ interface all the components as per the given block diagram
 code is written in Arduino IDE
 
 refer code from smart_gloves_code file :
-https://github.com/s-yazhini/smart-gloves-for-wheelchairs/blob/main/smart_gloves_code
+https://github.com/s-yazhini/smart-gloves-for-wheelchairs/blob/main/smart_gloves_code.c
